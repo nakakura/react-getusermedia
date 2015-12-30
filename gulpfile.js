@@ -1,9 +1,9 @@
 'use strict';
 
 var gulp        = require('gulp'),
+    browserify  = require('gulp-browserify'),
     typescript  = require('typescript'),
     ts          = require('gulp-typescript'),
-    browserify  = require('browserify'),
     source      = require('vinyl-source-stream'),
     del         = require('del')
     ;
@@ -17,11 +17,12 @@ gulp.task('compile', function () {
 });
 
 gulp.task('bundle', ['compile'], function () {
-  var b = browserify('.tmp/bootstrap.js');
-  return b.bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('dist'))
-  ;
+  gulp.src('./.tmp/bootstrap.js')
+      .pipe(browserify({
+        insertGlobals : true,
+        require: ["./bootstrap.js"]
+      }))
+      .pipe(gulp.dest('dist'))
 });
 
 gulp.task('clean', function (done) {

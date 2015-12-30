@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "module": "umd",
+    "target": "es3",
+    "module": "commonjs",
     "noImplicitAny": true,
     "jsx": "react"
   },
   "files":[
     "bootstrap.ts",
-    "main.tsx"
+    "videos.tsx"
   ]
 }

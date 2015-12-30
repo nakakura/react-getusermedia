@@ -1,24 +1,24 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {VideoPlayer} from './main';
+import {Videos} from './videos';
+import {IMainProps} from "./videos";
+import {IMainState} from "./videos";
 
 navigator.getUserMedia = ( navigator.getUserMedia ||
 navigator.webkitGetUserMedia ||
 navigator.mozGetUserMedia ||
 navigator.msGetUserMedia);
 
-navigator.getUserMedia (
-    // constraints
-    {
-        video: true,
-        audio: true
-    },
-    // successCallback
-    function(localMediaStream) {
-        var hoge = ReactDOM.render(React.createElement(VideoPlayer, {stream: localMediaStream}), document.getElementById('main'));
-    },
-    // errorCallback
-    function(err) {
-        console.log("The following error occured: " + err);
+var hoge = "moge";
+
+export class Controller{
+    constructor(){
     }
-);
+
+    display(mediaStream: MediaStream[]){
+        ReactDOM.unmountComponentAtNode(document.getElementById('main'));
+        var hoge = ReactDOM.render(React.createElement(Videos, {streams: mediaStream}, {}), document.getElementById('main'));
+    }
+}
+
+

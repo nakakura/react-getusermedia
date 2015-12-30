@@ -6,8 +6,45 @@
 </head>
 <body>
 <div id="main"></div>
-<script src="bundle.js"></script>
+<script src="lodash.js"></script>
+<script src="bootstrap.js"></script>
 <script>
+    window.onload = function(){
+        var Controller = require('./bootstrap.js');
+        var controller = new Controller.Controller();
+
+        document.onmousedown = function(){
+            navigator.getUserMedia (
+                    // constraints
+                    {
+                        video: true,
+                        audio: false
+                    },
+                    // successCallback
+                    function(leftStream) {
+                        navigator.getUserMedia (
+                                // constraints
+                                {
+                                    video: true,
+                                    audio: false
+                                },
+                                // successCallback
+                                function(rightStream) {
+                                    controller.display([leftStream, rightStream]);
+                                },
+                                // errorCallback
+                                function(err) {
+                                    console.log("The following error occured: " + err);
+                                }
+                        );
+                    },
+                    // errorCallback
+                    function(err) {
+                        console.log("The following error occured: " + err);
+                    }
+            );
+        };
+    };
 
 </script>
 </body>
